@@ -1,23 +1,33 @@
 import java.util.Scanner;
+public class App{
 
-public class App {
-    public static void main(String[] args) {
-        String ip_address;
-        Scanner k = new Scanner(System.in);
-        int i  = 0;
-     
-        System.out.print("Enter IPv4 Address: ");
-        ip_address = k.next();        
+    
 
-        for (String parts: ip_address.split("\\.")) {
-            ++i;
+    String Four_Octet_Check(String ip_address_input){
 
-            if(i <= 4){
-                if(Integer.parseInt(parts) > 255){System.out.println("The value [" +  parts + "] at the octal " + i + " is out of range");} 
-            }         
-                
-        }
-
-        k.close();
+        return ip_address_input;
+    
+        
+    
     }
+
+public static void main(String[] args) {
+    String ip_address_input;
+
+    App obj = new App();
+    Scanner k = new Scanner(System.in);
+
+    ip_address_input = k.next();
+
+    String x = obj.Four_Octet_Check(ip_address_input);
+    System.out.println(k);
+    k.close();
+
+
+    
+}
+
+
+
+
 }
