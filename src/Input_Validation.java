@@ -1,27 +1,22 @@
-class Input_Validation{
-    int i = 0;
-    boolean x;
+class Input_Validation {
+    public Boolean Octet_Check(String ip_address_input) {
+        String[] ipArray = ip_address_input.split("\\.");
 
-    public Boolean get_Four_Octet_Check_Validation(String ip_address_input){        
-    
-        for (String ip_address_parts: ip_address_input.split("\\.")) {
-            ++i;
-            if (i == 4){
+        if (ipArray.length != 4) { 
+            return false;
+        }
 
-                for (String ip_address_parts_for_check: ip_address_input.split("\\.")){
-                    int octet = Integer.parseInt(ip_address_parts_for_check);
-                    if(octet < 0 || octet > 255){
-                    
-                    x = false;
-                } else{x = true;}
+        for (String ip : ipArray) {
+            try {
+                int value = Integer.parseInt(ip);
+                if (value < 0 || value > 255) { 
+                    return false;
+                }
+            } catch (NumberFormatException e) {
+                return false; 
+            }
+        }
 
-                }   
-        
-        }else{x = false;}  
-        
+        return true; 
     }
-    return x;       
-    
-}
-
 }
