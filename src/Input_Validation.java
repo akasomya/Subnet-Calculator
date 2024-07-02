@@ -1,49 +1,66 @@
 class Input_Validation {
 
+    // Method to check if an IP address is valid
     public Boolean Octet_Check(String ip_address_input) {
         String[] ipArray = ip_address_input.split("\\.");
 
-        if (ipArray.length != 4) { 
+        if (ipArray.length != 4) {
             return false;
         }
 
         for (String ip : ipArray) {
             try {
                 int value = Integer.parseInt(ip);
-                if (value < 0 || value > 255) { 
+                if (value < 0 || value > 255) {
                     return false;
                 }
             } catch (NumberFormatException e) {
-                return false; 
+                return false;
             }
         }
 
-        return true; 
+        return true;
     }
 
-    public Boolean VLSM_Check(String subnet_mask_input){
-        String[] Subnet_Array = subnet_mask_input.split("\\.");
-        
-        if (Subnet_Array.length != 4) { 
+    // Method to check if a subnet mask is valid for VLSM
+    public Boolean VLSM_Check(String subnet_mask_input) {
+        String[] subnetArray = subnet_mask_input.split("\\.");
+
+        if (subnetArray.length != 4) {
             return false;
         }
-        for (String subnet : Subnet_Array) {
+
+        int previousValue = 255;
+        for (String subnet : subnetArray) {
             try {
                 int value = Integer.parseInt(subnet);
-                if (value < 0 || value > 255) { 
+
+                // Check if value is a valid subnet mask octet
+                switch (value) {
+                    case 255:
+                    case 254:
+                    case 252:
+                    case 248:
+                    case 240:
+                    case 224:
+                    case 192:
+                    case 128:
+                    case 0:
+                        break;
+                    default:
+                        return false;
+                }
+
+                // Check for contiguous ones followed by contiguous zeros
+                if (value > previousValue) {
                     return false;
                 }
-                else if(value == 0 || value == 128 ||value == 192 || value == 224|| value == 240 || value == 248 || value == 252|| value == 254 ||value == 255){
-
-                    return true;
-
-                }
-                
+                previousValue = value;
             } catch (NumberFormatException e) {
-                return false; 
+                return false;
             }
-            
         }
-        return true; 
+
+        return true;
     }
 }
