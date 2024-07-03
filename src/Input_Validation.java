@@ -1,7 +1,7 @@
 class Input_Validation {
 
     // Method to check if an IP address is valid
-    public Boolean Octet_Check(String ip_address_input) {
+    public Boolean ip_Octet_Check(String ip_address_input) {
         String[] ipArray = ip_address_input.split("\\.");
 
         if (ipArray.length != 4) {
@@ -63,4 +63,6 @@ class Input_Validation {
 
         return true;
     }
+
+    
 }

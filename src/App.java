@@ -12,13 +12,14 @@ public class App {
             do {
                 System.out.print("Enter IPv4 Address: ");
                 ip_address_input = k.next();
-            } while (!one.Octet_Check(ip_address_input));
+            } while (!one.ip_Octet_Check(ip_address_input));
 
             do {
                 System.out.print("Enter VLSM: ");
                 subnet_mask_input = k.next();
             } while (!one.VLSM_Check(subnet_mask_input));
 
+            
         }
     }
 }
