@@ -1,8 +1,7 @@
-class Input_Validation {
-
+class InputValidationAndCalculation {
     // Method to check if an IP address is valid
-    public Boolean ip_Octet_Check(String ip_address_input) {
-        String[] ipArray = ip_address_input.split("\\.");
+    public boolean isValidIpAddress(String ipAddress) {
+        String[] ipArray = ipAddress.split("\\.");
 
         if (ipArray.length != 4) {
             return false;
@@ -23,8 +22,8 @@ class Input_Validation {
     }
 
     // Method to check if a subnet mask is valid for VLSM
-    public Boolean VLSM_Check(String subnet_mask_input) {
-        String[] subnetArray = subnet_mask_input.split("\\.");
+    public boolean isValidSubnetMask(String subnetMask) {
+        String[] subnetArray = subnetMask.split("\\.");
 
         if (subnetArray.length != 4) {
             return false;
@@ -36,19 +35,8 @@ class Input_Validation {
                 int value = Integer.parseInt(subnet);
 
                 // Check if value is a valid subnet mask octet
-                switch (value) {
-                    case 255:
-                    case 254:
-                    case 252:
-                    case 248:
-                    case 240:
-                    case 224:
-                    case 192:
-                    case 128:
-                    case 0:
-                        break;
-                    default:
-                        return false;
+                if (!(value == 255 || value == 254 || value == 252 || value == 248 || value == 240 || value == 224 || value == 192 || value == 128 || value == 0)) {
+                    return false;
                 }
 
                 // Check for contiguous ones followed by contiguous zeros
@@ -63,6 +51,4 @@ class Input_Validation {
 
         return true;
     }
-
-    
 }
